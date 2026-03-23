@@ -13,7 +13,7 @@ def clean_lora_data(input_path, output_path):
 
             data = json.loads(line)
 
-            # 暴力清洗大模型套话口癖
+            # 清洗大模型套话口癖
             original_output = data.get("output", "")
 
             # 清除各种可能的开头套话
@@ -40,9 +40,8 @@ def clean_lora_data(input_path, output_path):
 
 
 if __name__ == "__main__":
-    # 指向你生成的全量数据
-    input_file = r'D:\Python_Project_of_Study\Ai_Study\data\outputs\instruction_tuning_quant.jsonl'
+    input_file = r'原始数据存放位置'
     # 生成最终的纯净版数据
-    final_output = r'D:\Python_Project_of_Study\Ai_Study\data\outputs\quant_lora_dataset_final.jsonl'
+    final_output = r'清洗后数据保存位置'
 
     clean_lora_data(input_file, final_output)

@@ -48,7 +48,7 @@
 
 ### 1. 环境依赖
 ```bash
-conda create -n fin_qwen python=3.10 -y
+conda create -n fin_qwen python=3.11 -y
 conda activate fin_qwen
 pip install torch torchvision torchaudio --index-url [https://download.pytorch.org/whl/cu124](https://download.pytorch.org/whl/cu124)
 pip install transformers accelerate bitsandbytes

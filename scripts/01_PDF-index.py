@@ -5,7 +5,7 @@ import pandas as pd
 
 def build_corpus_index(base_path):
     data = []
-    # 遍历你的券商研报文件夹
+    # 遍历研报文件夹
     for folder_name in os.listdir(base_path):
         folder_path = os.path.join(base_path, folder_name)
 
@@ -14,8 +14,8 @@ def build_corpus_index(base_path):
 
         for file_name in os.listdir(folder_path):
             if file_name.endswith('.pdf'):
-                # 用正则提取文件名中的数字序号（如 "华泰人工智能系列1.pdf" 提取出 1）
-                # 假设你的文件名里包含数字序号，如果没有，可以设为默认值 0
+                # 用正则提取文件名中的数字序号
+                # 假设文件名里包含数字序号，如果没有，可以设为默认值 0
                 match = re.search(r'\d+', file_name)
                 series_num = int(match.group()) if match else 0
 
@@ -35,11 +35,10 @@ def build_corpus_index(base_path):
 
 
 if __name__ == "__main__":
-    # 请替换为你本地的真实路径
-    pdf_base_path = r'D:\Python_Project_of_Study\Ai_Study\data\raw_pdf'
-    output_csv = r'D:\Python_Project_of_Study\Ai_Study\data\processed\corpus_index.csv'
+    pdf_base_path = r'本地的真实路径'
+    output_csv = r'本地的真实路径'
 
-    print("正在扫描并构建券商金工系列研报索引...")
+    print("正在扫描并构建研报索引...")
     index_df = build_corpus_index(pdf_base_path)
 
     # 保存为 CSV

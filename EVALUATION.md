@@ -740,27 +740,27 @@
 > 
 > ### 3. 换手率约束
 > 
-> 为了引入换手率约束，我们可以定义一个换手率上限 $`text{max\_turnover}`$ ，并将其作为优化约束条件。换手率可以通过调仓前后的权重差来计算：
+> 为了引入换手率约束，我们可以定义一个换手率上限 $`\text{max\_turnover}\`$ ，并将其作为优化约束条件。换手率可以通过调仓前后的权重差来计算：
 > 
->  $$text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}\$$
+>  $$\\text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}\\$$
 > 
 > 换手率约束可以表示为：
 > 
-> $`frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}`$
+> $$\\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\\$
 > 
 > ### 4. 凸优化问题的数学表示
 > 
 > 假设我们有 $`n`$  只股票，权重向量 $`w`$  为 $`n\times 1`$  的向量，收益向量  $`R`$  为 $`n\times 1`$  的向量。优化问题可以表示为：
 > 
-> $$\text{最大化} \quad w^T R - C \$$
+> $$\\text{最大化} \quad w^T R - C\\$$
 > 
 > 其中：
 > 
-> $$C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\$$
+> $$\\C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\\$$
 > 
 > 换手率约束可以表示为：
 > 
-> $$\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\$$
+> $$\\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\\$$
 > 
 > ### 5. 使用凸优化库实现
 > 

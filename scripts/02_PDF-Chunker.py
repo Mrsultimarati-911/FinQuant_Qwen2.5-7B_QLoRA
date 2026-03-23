@@ -7,7 +7,6 @@ import re
 
 # 初始化 RapidOCR PDF 提取引擎
 print("正在初始化本地 OCR 引擎...")
-# 修正：回归官方正确类名，且不传入任何失效参数，使用默认全能配置
 ocr_engine = RapidOCRPDF()
 
 
@@ -45,7 +44,7 @@ def extract_text_with_fallback_ocr(pdf_path):
         cleaned_text = re.sub(r'\s+', ' ', cleaned_text)  # 压缩多余空格
         cleaned_text = re.sub(r'(\d+)\s*\n+\s*(\d+)', r'\1\2', cleaned_text)  # 修复排版导致的数字截断
 
-        # 去掉常见无用后缀 (你可以根据实际情况在数组里继续补充)
+        # 去掉常见无用后缀 (可以根据实际情况在数组里继续补充)
         for disclaimer in ["请务必阅读正文最后免责声明", "免责声明", "本报告仅供参考"]:
             cleaned_text = cleaned_text.replace(disclaimer, "")
 
@@ -109,8 +108,7 @@ def chunk_with_metadata(index_csv_path, output_jsonl_path):
 
 
 if __name__ == "__main__":
-    # 路径保持不变，直接运行
-    index_csv = r'D:\Python_Project_of_Study\Ai_Study\data\processed\corpus_index.csv'
-    output_chunks = r'D:\Python_Project_of_Study\Ai_Study\data\processed\corpus_chunks_ocr.jsonl'
+    index_csv = r'保存文件索引的csv文件地址'
+    output_chunks = r'分块后文件保存地址'
 
     chunk_with_metadata(index_csv, output_chunks)

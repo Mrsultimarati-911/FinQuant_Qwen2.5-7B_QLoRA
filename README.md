@@ -57,7 +57,7 @@ pip install transformers accelerate bitsandbytes
 ```
 
 ### 2. 模型推理
-```bash
+```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 

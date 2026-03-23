@@ -75,6 +75,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
 # 动态挂载量化大脑
 model = PeftModel.from_pretrained(base_model, lora_path)
 
+# 提示词实例
 prompt = "请说明在多因子选股中，如何利用树模型处理特征交叉，并给出防过拟合的超参建议。"
 inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
 outputs = model.generate(**inputs, max_new_tokens=512)

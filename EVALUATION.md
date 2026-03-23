@@ -129,7 +129,7 @@
 >      $$\ 
 >      \text{优化目标} = \text{风险} + \lambda \times \text{拥挤度惩罚项} 
 >      \$$
->      其中，$`\ lambda`$ 是拥挤度惩罚项的权重，可以根据实际需要进行调整。
+>      其中，$`\lambda`$ 是拥挤度惩罚项的权重，可以根据实际需要进行调整。
 >    - 具体的优化目标函数可能如下：
 >      $$\ 
 >      \text{优化目标} = \text{方差} + \lambda \times \text{交易量占比} + \lambda \times \text{持仓集中度} + \lambda \times \text{价格波动率}

@@ -730,7 +730,7 @@
 > 
 > 假设我们的优化目标是最大化收益减去交易成本。收益可以通过一个目标函数 $`R`$ 表示，交易成本可以通过一个惩罚项 $`C`$ 表示。优化目标函数可以表示为：
 > 
-> $$text{最大化} \quad R - C\$$
+> $$最大化\quad R - C\$$
 > 
 > 其中：
 > 
@@ -744,9 +744,7 @@
 > 
 >  $$\text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}$$
 > 
-> 换手率约束可以表示为：
-> 
-> $$frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}$$
+> 换手率约束可以表示为：$`frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}`$
 > 
 > ### 4. 凸优化问题的数学表示
 > 
@@ -758,9 +756,7 @@
 > 
 > $$C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)$$
 > 
-> 换手率约束可以表示为：
-> 
-> $$frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}$$
+> 换手率约束可以表示为：$`frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}`$
 > 
 > ### 5. 使用凸优化库实现
 > 

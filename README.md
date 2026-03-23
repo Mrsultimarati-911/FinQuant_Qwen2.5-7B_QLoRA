@@ -54,6 +54,7 @@ conda create -n finquant python=3.10 -y
 conda activate finquant
 pip install torch torchvision torchaudio --index-url [https://download.pytorch.org/whl/cu124](https://download.pytorch.org/whl/cu124)
 pip install transformers accelerate bitsandbytes
+```
 
 ### 2. 模型推理
 ```bash
@@ -78,6 +79,7 @@ prompt = "请说明在多因子选股中，如何利用树模型处理特征交�
 inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
 outputs = model.generate(**inputs, max_new_tokens=512)
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+```
 
 ---
 

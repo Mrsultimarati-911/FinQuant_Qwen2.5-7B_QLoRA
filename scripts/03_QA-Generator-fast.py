@@ -5,7 +5,7 @@ from openai import AsyncOpenAI
 from tqdm.asyncio import tqdm
 
 # 初始化异步 API 客户端
-API_KEY = "sk-f904f7212faf4b88a3b83799797b84fa"
+API_KEY = "填入大模型Api接口"
 client = AsyncOpenAI(
     api_key=API_KEY,
     base_url="https://api.deepseek.com"
@@ -89,7 +89,7 @@ async def main():
             if line.strip():
                 chunks_data.append(json.loads(line))
 
-    print(f"成功加载 {len(chunks_data)} 个文本块。准备启动异步高并发引擎...")
+    print(f"成功加载 {len(chunks_data)} 个文本块。")
 
     # 2. 创建所有异步任务
     tasks = [process_chunk(chunk) for chunk in chunks_data]
@@ -98,7 +98,7 @@ async def main():
     # 3. 动态接收结果并实时写入硬盘
     # 使用 'w' 模式会覆盖之前的测试数据，保证最终文件的纯净度
     with open(output_jsonl, 'w', encoding='utf-8') as f_out:
-        # as_completed 谁先完成就先处理谁，绝不排队死等
+        # as_completed 
         for coro in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="⚡ 极速提炼 LoRA 语料"):
             qa_list = await coro
 
@@ -110,11 +110,10 @@ async def main():
             # 实时将内存缓冲区的数据刷入硬盘，防止意外断电丢失
             f_out.flush()
 
-    print(f"\n🎉 全量跑通！成功提炼出 {total_qa_pairs} 条量化指令微调数据。")
-    print(f"你的 LoRA 黄金数据集已妥善保存在：{output_jsonl}")
+    print(f"\n提炼出 {total_qa_pairs} 条量化指令微调数据。")
+    print(f"数据集已妥善保存在：{output_jsonl}")
 
 
 if __name__ == "__main__":
-    # Windows 环境下运行 asyncio 常见标准写法
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main())

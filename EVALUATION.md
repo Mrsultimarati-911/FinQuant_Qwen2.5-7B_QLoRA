@@ -712,41 +712,41 @@
 > 
 > 交易成本包括双边印花税和滑点成本。假设每个股票的交易成本为 $`C_i`$ ，双边印花税率为 $`t`$ ，滑点成本为 $`s`$ ，则每个股票的交易成本可以表示为：
 > 
-> $$\C_i = t \cdot \text{交易量} + s \cdot \text{价格波动}\$$ 
+> $$C_i = t \cdot \text{交易量} + s \cdot \text{价格波动}\$$ 
 > 
 > 在实际应用中，交易量可以通过调仓前后的权重差来近似计算。假设 $`w_i^t`$ 和 $`w_i^{t+1}`$  分别是调仓前和调仓后的权重，则交易量可以近似为：
 > 
-> $$\text{交易量} \approx \frac{|w_i^t - w_i^{t+1}|}{p_i} \$$
+> $$text{交易量} \approx \frac{|w_i^t - w_i^{t+1}|}{p_i}\$$
 > 
 > 其中 $`p_i`$ 是股票的价格。因此，每个股票的交易成本可以表示为：
 > 
-> $$\C_i = t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \text{价格波动}\$$ 
+> $$C_i = t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \text{价格波动}\$$ 
 > 
 > 为了简化问题，我们可以假设价格波动为常数 $`Delta p`$，则交易成本可以进一步简化为：
 > 
-> $$\C_i = t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p\$$
+> $$C_i = t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p\$$
 > 
 > ### 2. 优化目标函数
 > 
 > 假设我们的优化目标是最大化收益减去交易成本。收益可以通过一个目标函数 $`R`$ 表示，交易成本可以通过一个惩罚项 $`C`$ 表示。优化目标函数可以表示为：
 > 
-> $$\text{最大化} \quad R - C\$$
+> $$text{最大化} \quad R - C\$$
 > 
 > 其中：
 > 
-> $$\R = \sum_i \text{收益} \cdot w_i\$$
+> $$R = \sum_i \text{收益} \cdot w_i\$$
 > 
-> $$\C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\$$
+> $$C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\$$
 > 
 > ### 3. 换手率约束
 > 
 > 为了引入换手率约束，我们可以定义一个换手率上限 $`text{max\_turnover}`$ ，并将其作为优化约束条件。换手率可以通过调仓前后的权重差来计算：
 > 
->  $$\text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}\$$
+>  $$text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}\$$
 > 
 > 换手率约束可以表示为：
 > 
-> $$\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\$$
+> $`frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}`$
 > 
 > ### 4. 凸优化问题的数学表示
 > 
@@ -756,7 +756,7 @@
 > 
 > 其中：
 > 
-> $$\C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\$$
+> $$C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\$$
 > 
 > 换手率约束可以表示为：
 > 
@@ -805,9 +805,9 @@
 > 
 > ### 代码解释
 > 
-> 1. **定义变量**：定义调仓前后的权重向量 $`\w_t\`$  和 $`\w_t1\`$ ，收益向量 $`\R\`$ ，交易成本参数 $`\t\`$  和 $`\s\`$ ，换手率上限 $`\text{max\_turnover}\`$ ，以及价格波动 $`\Delta p\`$ 。
+> 1. **定义变量**：定义调仓前后的权重向量 $`w_t`$  和 $`w_t1`$ ，收益向量 $`R`$ ，交易成本参数 $`t`$  和 $`s`$ ，换手率上限 $`text{max\_turnover}`$ ，以及价格波动 $`Delta p`$ 。
 > 2. **定义交易成本惩罚项**：使用 `cvxpy` 的 `cp.abs` 和 `cp.sum` 函数来计算交易成本。
-> 3. **定义换手率约束**：使用 `cvxpy` 的 `cp.norm` 和 `cp.sum` 函数来计算换手率，并将其限制在 $`\text{max\_turnover}\`$  以内。
+> 3. **定义换手率约束**：使用 `cvxpy` 的 `cp.norm` 和 `cp.sum` 函数来计算换手率，并将其限制在 $`text{max\_turnover}`$  以内。
 > 4. **定义优化目标**：使用 `cvxpy` 的 `cp.Maximize` 函数来最大化收益减去交易成本。
 > 5. **定义优化问题**：使用 `cvxpy` 的 `cp.Problem` 函数来定义优化问题，并求解该问题。
 > 

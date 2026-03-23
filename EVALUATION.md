@@ -740,27 +740,27 @@
 > 
 > ### 3. 换手率约束
 > 
-> 为了引入换手率约束，我们可以定义一个换手率上限 $`\text{max\_turnover}\`$ ，并将其作为优化约束条件。换手率可以通过调仓前后的权重差来计算：
+> 为了引入换手率约束，我们可以定义一个换手率上限 $`max\_turnover`$ ，并将其作为优化约束条件。换手率可以通过调仓前后的权重差来计算：
 > 
->  $$\\text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}\\$$
+>  $$\text{换手率} = \frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t}$$
 > 
 > 换手率约束可以表示为：
 > 
-> $$\\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\\$
+> $$frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}$$
 > 
 > ### 4. 凸优化问题的数学表示
 > 
 > 假设我们有 $`n`$  只股票，权重向量 $`w`$  为 $`n\times 1`$  的向量，收益向量  $`R`$  为 $`n\times 1`$  的向量。优化问题可以表示为：
 > 
-> $$\\text{最大化} \quad w^T R - C\\$$
+> $$text{最大化} \quad w^T R - C\$$
 > 
 > 其中：
 > 
-> $$\\C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)\\$$
+> $$C = \sum_i \left( t \cdot \frac{|w_i^t - w_i^{t+1}|}{p_i} + s \cdot \Delta p \right)$$
 > 
 > 换手率约束可以表示为：
 > 
-> $$\\frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}\\$$
+> $$frac{\sum_i |w_i^t - w_i^{t+1}|}{\sum_i w_i^t} \leq \text{max\_turnover}$$
 > 
 > ### 5. 使用凸优化库实现
 > 
@@ -807,7 +807,7 @@
 > 
 > 1. **定义变量**：定义调仓前后的权重向量 $`w_t`$  和 $`w_t1`$ ，收益向量 $`R`$ ，交易成本参数 $`t`$  和 $`s`$ ，换手率上限 $`text{max\_turnover}`$ ，以及价格波动 $`Delta p`$ 。
 > 2. **定义交易成本惩罚项**：使用 `cvxpy` 的 `cp.abs` 和 `cp.sum` 函数来计算交易成本。
-> 3. **定义换手率约束**：使用 `cvxpy` 的 `cp.norm` 和 `cp.sum` 函数来计算换手率，并将其限制在 $`text{max\_turnover}`$  以内。
+> 3. **定义换手率约束**：使用 `cvxpy` 的 `cp.norm` 和 `cp.sum` 函数来计算换手率，并将其限制在 $`max\_turnover`$  以内。
 > 4. **定义优化目标**：使用 `cvxpy` 的 `cp.Maximize` 函数来最大化收益减去交易成本。
 > 5. **定义优化问题**：使用 `cvxpy` 的 `cp.Problem` 函数来定义优化问题，并求解该问题。
 > 
